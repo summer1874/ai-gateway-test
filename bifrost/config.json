@@ -1,0 +1,29 @@
+{
+  "client": {
+    "drop_excess_requests": false,
+    "enable_logging": true,
+    "allow_direct_keys": false,
+    "enforce_governance_header": false,
+    "enforce_auth_on_inference": false
+  },
+  "providers": {
+    "openai": {
+      "keys": [{ "name": "litellm-mock", "value": "sk-mock", "models": ["*"], "weight": 1.0 }],
+      "network_config": { "base_url": "http://127.0.0.1:18001", "default_request_timeout_in_seconds": 10, "max_retries": 0 }
+    },
+    "groq": {
+      "keys": [{ "name": "dashscope-mock", "value": "sk-mock", "models": ["*"], "weight": 1.0 }],
+      "network_config": { "base_url": "http://127.0.0.1:18002", "default_request_timeout_in_seconds": 10, "max_retries": 0 }
+    }
+  },
+  "config_store": {
+    "enabled": true,
+    "type": "postgres",
+    "config": { "host": "localhost", "port": "55432", "user": "postgres", "password": "trust-any", "db_name": "bifrost", "ssl_mode": "disable" }
+  },
+  "logs_store": {
+    "enabled": true,
+    "type": "postgres",
+    "config": { "host": "localhost", "port": "55432", "user": "postgres", "password": "trust-any", "db_name": "bifrost", "ssl_mode": "disable" }
+  }
+}

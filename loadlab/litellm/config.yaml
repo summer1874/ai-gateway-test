@@ -1,0 +1,39 @@
+# LiteLLM proxy for LoadLab. Mock upstreams are the same 18001/18002 used by the other gateways;
+# MiniMax goes through the tap proxy, which injects the real key, so only a placeholder lives here.
+model_list:
+  - model_name: mock-model
+    litellm_params:
+      model: openai/mock-model
+      api_base: http://127.0.0.1:18001/v1
+      api_key: sk-mock
+      timeout: 10
+  - model_name: mock-fallback
+    litellm_params:
+      model: openai/mock-model
+      api_base: http://127.0.0.1:18002/v1
+      api_key: sk-mock
+      timeout: 10
+  - model_name: minimax/*
+    litellm_params:
+      model: openai/*
+      api_base: http://127.0.0.1:18090/v1
+      api_key: sk-placeholder-replaced-by-tap
+      timeout: 120
+  - model_name: cmd/*
+    litellm_params:
+      model: openai/*
+      api_base: http://127.0.0.1:18091/v1
+      api_key: sk-placeholder-replaced-by-cmdtap
+      timeout: 120
+
+litellm_settings:
+  num_retries: 0
+  drop_params: true
+
+router_settings:
+  num_retries: 0
+  disable_cooldowns: true
+
+general_settings:
+  # Keep request and response bodies so they show in the admin UI's Logs page.
+  store_prompts_in_spend_logs: true

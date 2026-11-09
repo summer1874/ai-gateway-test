@@ -1,0 +1,31 @@
+# Secrets: never commit
+.env
+.env.*
+*.pem
+*.key
+**/master_key.txt
+**/setup_token.txt
+*.bak
+*.bak-*
+
+# Local runtime state (may contain request bodies and gateway secrets)
+pgdata/
+logs/
+run/
+results/
+loadlab/results/
+
+# Environments and binaries
+.venv/
+.venv-old/
+.venv-litellm/
+bin/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+.claude/
